@@ -14,13 +14,15 @@ return new class extends Migration
         Schema::create('medicines', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('decription')->nullable();
+            $table->text('description')->nullable();
             $table->date('manufacture');
             $table->date('expiration');
             $table->integer('price');
             $table->integer('quantity');
             $table->enum('prescription_required',['0','1'])->default('1');
             $table->string('image')->nullable();
+            $table->unsignedBigInteger('pharmacy_id')->nullable();
+            $table->foreign('pharmacy_id')->references('id')->on('pharmacys')->onDelete('cascade');
             $table->timestamps();
         });
     }

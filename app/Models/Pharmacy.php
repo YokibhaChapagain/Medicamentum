@@ -21,4 +21,8 @@ class Pharmacy extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function medicines()
+    {
+        return $this->hasMany(Medicine::class);
+    }
 }
