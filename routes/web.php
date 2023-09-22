@@ -7,6 +7,7 @@ use App\Http\Controllers\PharmacyRegisterController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PharmacyController;
+use App\Http\Controllers\MedicineController;
 use GuzzleHttp\Middleware;
 
 use Illuminate\Support\Facades\Route;
@@ -48,5 +49,11 @@ Route::group(['middleware' => ['auth','isloggedin', 'admin'], 'prefix' => 'admin
 
 Route::group(['middleware' => ['auth','isloggedin', 'pharmacy'], 'prefix' => 'pharmacy'], function () {
     Route::get('/dashboard', [PharmacyController::class, 'index'])->name('pharmacy.dashboard');
+    Route::get('/addmedicine', [MedicineController::class, 'show']);
+    Route::post('/addmedicine', [MedicineController::class, 'store']);
+    Route::get('/inventory', [MedicineController::class, 'inventory']);
+    Route::get('edit/{id}',[MedicineController::class,'edit'])->name('edit');
+    Route::put('updatemedicine/{id}',[MedicineController::class,'update'])->name('updatemedicine');
+    Route::get('delete/{id}',[MedicineController::class,'remove'])->name('delete');
 });
 
