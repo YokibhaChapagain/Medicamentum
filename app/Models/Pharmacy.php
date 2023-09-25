@@ -25,4 +25,9 @@ class Pharmacy extends Model
     {
         return $this->hasMany(Medicine::class);
     }
+
+    public function pharmacyUser()
+{
+    return $this->belongsTo(User::class, 'user_id')->where('role', 'pharmacy');
+}
 }
