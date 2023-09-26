@@ -21,4 +21,9 @@ class Medicine extends Model
     {
         return $this->belongsTo(Pharmacy::class);
     }
+
+    public function quotation()
+    {
+        return $this->hasMany(Quotation::class);
+    }
 }
