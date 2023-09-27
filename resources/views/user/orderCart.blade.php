@@ -1,25 +1,17 @@
 @include('user.menubar')
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite('resources/css/app.css')
-
 </head>
 <body>
-
     <div class="mt-20 mr-4 md:ml-64">
-        <div class="p-4 bg-[#33c9ba] rounded-lg mb-4">
-            <h1 class="flex text-2xl">
-                <div class="mr-2 font-bold">Welcome,</div>  <div class="text-white">{{$user->name}}</div>
-            </h1>
-        </div>
-
-        <div class="flex flex-wrap -mx-2">
+        <div class="flex flex-wrap">
             @foreach ($medicines as $medicine)
-                <div class="w-full px-2 mb-4 md:w-1/2 lg:w-1/5">
+                <div class="w-full px-2 mb-4 md:w-1/2 lg:w-1/2">
                     <div class="flex flex-col items-center justify-center h-full p-2 bg-white rounded-lg shadow-md">
                         <!-- Medicine Photo -->
                         <div class="flex items-center justify-center w-32 h-32">
@@ -36,7 +28,7 @@
                         @if ($medicine->pharmacy)
                             <p class="mt-2 text-sm text-gray-500">Pharmacy: {{ $medicine->pharmacy->pharmacyUser->name ?? 'N/A'}}</p>
                         @else
-                            <p class="mt-2 text-sm text-gray-500">Related Pharmacy: N/A</p>
+                            <p class="mt-2 text-sm text-gray-500">Pharmacy: N/A</p>
                         @endif
 
                         <!-- Add to Cart Button -->
@@ -47,9 +39,6 @@
                 </div>
             @endforeach
         </div>
-
-    </div>
-
-
+        </div>
 </body>
 </html>
