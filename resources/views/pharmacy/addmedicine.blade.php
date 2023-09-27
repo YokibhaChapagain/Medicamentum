@@ -16,8 +16,6 @@
             <!-- Form -->
            <div class="sm:w-screen px-14">
 
-
-
                <h2 class="text-2xl font-bold text-[#318ECB] text-center">Add Medicine</h2>
 
 
@@ -87,6 +85,5 @@
 
            </div>
 </div>
-
 </body>
 </html>
