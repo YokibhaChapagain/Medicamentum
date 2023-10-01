@@ -22,6 +22,8 @@
                             <th class="px-4 py-2">No</th>
                             <th class="px-4 py-2">Note</th>
                             <th class="px-4 py-2 text-center" colspan="3">Images</th>
+                            <th class="px-4 py-2">Pharmacy Name</th>
+
                         </tr>
                     </thead>
 
@@ -59,10 +61,11 @@
                                          ---
                                      @endif
                                 </td>
+                                <td class="px-4 py-2 border">{{ $row->pharmacy->user->name ??'N?A'}}</td>
                             </tr>
                         @empty
                             <tr>
-                                <td class="px-4 py-2 text-center border text-danger" colspan="5">No Data Record</td>
+                                <td class="px-4 py-2 text-center border text-danger" colspan="6">No Data Record</td>
                             </tr>
                         @endforelse
                     </tbody>
