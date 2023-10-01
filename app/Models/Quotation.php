@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Quotation extends Model
 {
-    use HasFactory;
+    protected $fillable = ['description', 'drugs', 'quanity', 'amount', 'order_id', 'user_id'];
 
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
-    
+
     public function medicine()
     {
         return $this->belongsTo(Medicine::class, 'drugs', 'id');
