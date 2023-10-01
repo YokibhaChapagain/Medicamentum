@@ -36,19 +36,6 @@ class MedicineController extends Controller
             $medicine->quantity = $request->quantity;
             $medicine->prescription_required=$request->prescription;
 
-            // if ($request->has('prescription')) {
-            //     $selectedPrescription = $request->input('prescription');
-            //     if ($selectedPrescription == '1') {
-            //         // "prescription_required" radio button was selected
-            //         $medicine->prescription_required = 1;
-            //     } elseif ($selectedPrescription == '0') {
-            //         // "prescription_not_required" radio button was selected
-            //         $medicine->prescription_required = 0;
-            //     } else {
-            //         // Handle any other value if needed
-            //     }
-            // }
-
 
             if($request ->hasFile('image')){
                 $imagePath = $request->file('image')->store('public/images');
@@ -99,9 +86,14 @@ class MedicineController extends Controller
 
     public function remove($id){
         $medicine= Medicine ::find($id);
+    //      if ($medicine->image) {
+    //     $imagePath = 'public/' . $medicine->image;
+    //     if (Storage::exists($imagePath)) {
+    //         Storage::delete($imagePath);
+    //     }
+    // }
         $medicine->delete();
         return redirect('pharmacy/inventory')->with('remove', 'Deleted Successfully!');
     }
-
 
 }

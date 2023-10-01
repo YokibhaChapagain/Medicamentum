@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 Use App\Models\Prescription;
+use App\Models\Pharmacy;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+
 
 
 use Illuminate\Http\Request;
@@ -20,6 +23,7 @@ class PrescriptionController extends Controller
 {
     $request->validate([
         'note' => 'required',
+        'pharmacy_id'=>'required|exists:pharmacys,id',
         'image1' => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
         'image2' => 'image|mimes:jpeg,jpg,png,gif,svg|max:2048',
         'image3' => 'image|mimes:jpeg,jpg,png,gif,svg|max:2048',
@@ -29,6 +33,8 @@ class PrescriptionController extends Controller
 
     $user->note = $request->input('note');
     $user->user_id = $request->input('user_id');
+    $user->pharmacy_id = $request->input('pharmacy_id');
+
 
     if ($request->hasFile('image1')) {
         $image1 = time() . rand(1, 1000) . '.' . $request->file('image1')->extension();
@@ -50,15 +56,24 @@ class PrescriptionController extends Controller
 
     $user->save();
 
-    return redirect('user/history');
-    // return view('user.history',compact('user'));
-}
+    return redirect('user/history');}
 
     public function show()
     {
-        $precription = Prescription::all();
+        $user = Auth::user()->pharmacy;
+        $prescription = Prescription::where('pharmacy_id', $user->id)->get();
 
-        return view('pharmacy.prescription-list', compact('precription'));
+        return view('pharmacy.prescription-list', compact('prescription'));
     }
+
+    public function create()
+
+{
+    $pharmacyUsers=Pharmacy::all();
+
+
+    return view('user.upload-prescription', compact('pharmacyUsers'));
+}
+
 
 }

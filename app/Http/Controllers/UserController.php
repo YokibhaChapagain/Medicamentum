@@ -13,6 +13,7 @@ class UserController extends Controller
 {
     public function index()
     {
+    
 
         $user = Auth::user();
         $medicines = Medicine::with(['pharmacy', 'pharmacy.pharmacyUser'])->get();
