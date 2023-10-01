@@ -50,8 +50,9 @@
                         <tr class="order-b">
 
                             <th class="p-3 px-4 text-left">Name</th>
-                            <th class="p-3 px-4 text-left">Description</th>
+                            <th class="p-3 text6left px-14">Description</th>
                             <th class="p-3 px-4 text-left">Manufacture</th>
+                            <th class="p-3 px-4 text-left">Expiration</th>
                             <th class="p-3 px-4 text-left">Price</th>
                             <th class="p-3 px-4 text-left">Quantity</th>
                             <th class="p-3 px-4 text-left">Prescription</th>
@@ -65,11 +66,12 @@
                         <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }} hover:bg-blue-100">
 
                             <td class="p-3 px-4 text-left">{{ $medicine->name }}</td>
-                            <td class="p-3 px-4 text-left">{{ $medicine->description }}</td>
+                            <td class="p-3 px-1 text-left">{{ $medicine->description }}</td>
                             <td class="p-3 px-4 text-left">{{ $medicine->manufacture }}</td>
+                            <td class="p-3 px-2 text-left">{{ $medicine->expiration }}</td>
                             <td class="p-3 px-4 text-left">{{ $medicine->price }}</td>
-                            <td class="p-3 px-4 text-left">{{ $medicine->quantity }}</td>
-                            <td class="p-3 px-4 text-left">{{ $medicine->prescription_required ? 'Yes' : 'No' }}</td>
+                            <td class="p-3 px-6 text-left">{{ $medicine->quantity }}</td>
+                            <td class="p-3 px-6 text-left">{{ $medicine->prescription_required ? 'Yes' : 'No' }}</td>
                             <td class="p-3 px-4 text-left ">
                                 <img src="{{asset('storage/'.  $medicine->image) }}" alt="{{ $medicine->name }} Image" height="50" width="50">
                             </td>
