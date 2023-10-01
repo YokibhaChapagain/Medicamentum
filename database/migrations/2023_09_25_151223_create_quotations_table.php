@@ -19,7 +19,7 @@ return new class extends Migration
             $table->decimal('amount', 5, 2);
             $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('user_id');
-            $table->decimal('total', 5, 2)->nullable();
+            $table->decimal('total', 10, 2)->nullable();
             $table->integer('status')->default(0);
             $table->timestamps();
 

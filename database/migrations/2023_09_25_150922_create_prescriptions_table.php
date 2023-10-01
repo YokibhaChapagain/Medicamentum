@@ -17,10 +17,14 @@ return new class extends Migration
             $table->string('image1');
             $table->string('image2')->nullable();
             $table->string('image3')->nullable();
+            $table->boolean('confirm')->default(false);
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('pharmacy_id')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('pharmacy_id')->references('id')->on('pharmacys')->onDelete('cascade');
+
         });
     }
 
