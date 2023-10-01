@@ -8,9 +8,16 @@ export default {
   ],
 
   theme: {
-    extend: {},
+    extend: {
+        height: {
+            '128': '32rem',
+            '160': '40rem',
+            '192': '42rem',
+            '224': '56rem',
+          },
+    },
   },
-  
+
   plugins: [],
 }
 

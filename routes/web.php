@@ -10,7 +10,9 @@ use App\Http\Controllers\PharmacyController;
 use App\Http\Controllers\MedicineController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PrescriptionController;
+use App\Http\Controllers\QuotationController;
 use App\Http\Controllers\PreparedQuotationController;
+use App\Http\Controllers\UploadedPrescriptionController;
 
 
 use Illuminate\Support\Facades\Route;
@@ -46,10 +48,11 @@ Route::group(['middleware' => ['auth', 'isloggedin','user'], 'prefix' => 'user']
     Route::get('/dashboard', [UserController::class, 'index'])->name('user.dashboard');
     Route::get('/order',[OrderController::class,'index'])->name('user.order');
     // Route::post('/upload-prescription', [PrescriptionController::class,'store']);
-    Route::view('/upload-prescription', 'user.upload-prescription');
-    Route::post('/prescription-store', [PrescriptionController::class,'store']);
+    Route::get('/upload-prescription', [PrescriptionController::class, 'create'])->name('upload-prescription');
+    Route::post('/prescription-store', [PrescriptionController::class, 'store']);
     Route::get('/history', [PrescriptionController::class, 'index']);
     Route::get('/prepared-quotation', [PreparedQuotationController::class, 'index']);
+    Route::get('/quotation-details/{id}', [UploadedPrescriptionController::class, 'Details']);
     Route::post('/status-update', [PreparedQuotationController::class, 'store']);
 
 });
@@ -66,5 +69,13 @@ Route::group(['middleware' => ['auth','isloggedin', 'pharmacy'], 'prefix' => 'ph
     Route::get('edit/{id}',[MedicineController::class,'edit'])->name('edit');
     Route::put('updatemedicine/{id}',[MedicineController::class,'update'])->name('updatemedicine');
     Route::get('delete/{id}',[MedicineController::class,'remove'])->name('delete');
+    Route::get('prescription-list', [PrescriptionController::class, 'show']);
+    Route::get('uploaded-prescription/{id}', [UploadedPrescriptionController::class, 'index']);
+    Route::post('/quotation-add', [QuotationController::class, 'store']);
+    Route::get('accept', [PharmacyController::class, 'accept']);
+    Route::get('reject', [PharmacyController::class, 'reject']);
+    Route::get('pending', [PharmacyController::class, 'pending']);
+
 });
+
 
