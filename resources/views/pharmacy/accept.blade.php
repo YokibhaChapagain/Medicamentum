@@ -11,12 +11,12 @@
     <div class="mx-4 mb-4 mt-28 md:ml-64">
 
         <div class="bg-white rounded-lg shadow">
-            <div class="bg-gray-200 text-lg font-semibold p-3">
+            <div class="p-3 text-lg font-semibold bg-gray-200">
                 <span class="font-bold">Accept Quotation</span>
             </div>
 
             <div class="p-4">
-                <table class="table-auto w-full">
+                <table class="w-full border-separate border-spacing-y-2">
                     <thead class="bg-gray-100">
                         <tr>
                             <th class="px-4 py-2">Item Orders</th>
@@ -36,15 +36,15 @@
                                 <td class="px-4 py-2">{{$row->amount}}</td>
                                 <td>
                                     @if($row->status == 0)
-                                    <div class="px-4 py-2 bg-yellow-500 text-white rounded-full">
+                                    <div class="px-4 py-2 text-white bg-yellow-500 rounded-full">
                                         Pending
                                     </div>
                                     @elseif ($row->status == 1)
-                                    <div class="px-4 py-2 bg-green-500 text-white rounded-full">
+                                    <div class="px-4 py-2 text-white bg-green-500 rounded-full">
                                         Accept
                                     </div>
                                     @elseif ($row->status == 2)
-                                    <div class="px-4 py-2 bg-red-500 text-white rounded-full">
+                                    <div class="px-4 py-2 text-white bg-red-500 rounded-full">
                                         Reject
                                     </div>
                                     @endif

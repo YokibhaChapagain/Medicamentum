@@ -16,7 +16,7 @@
             </div>
 
             <div class="p-4">
-                <table class="w-full">
+                <table class="w-full border-separate border-spacing-y-4">
                     <thead class="bg-gray-100">
                         <tr class=>
                             <th class="px-4 py-2">Item Orders</th>
@@ -32,7 +32,7 @@
                         @php $i=1; @endphp
                         @php $total=0; @endphp
                         @forelse ($data as $row)
-                            <tr >
+                            <tr>
                                 <td class="px-8">{{$i++}}</td>
                                 <td>{{$row->note}}</td>
                                 <td  class="px-8">{{$row->amount}}</td>

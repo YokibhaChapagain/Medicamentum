@@ -15,7 +15,7 @@
             </div>
 
             <div class="p-4">
-                <table class="min-w-full table-auto">
+                <table class="w-full border-separate border-spacing-y-2">
                     <thead class="bg-gray-200">
                         <tr>
                             <th class="px-1 py-2">Item Orders</th>
