@@ -38,7 +38,7 @@
 
                 <button  class="bg-[#318ECB] rounded-xl text-white py-2 mt-2" type="submit">Log in</button>
 
-                <a href="#!" class="py-4 mt-2 text-xs border-b">Forgot password?</a>
+                <a href="{{route('email.verify.get')}}" class="py-4 mt-2 text-xs border-b">Forgot password?</a>
 
                 <div class="flex items-center justify-between text-xs">
                     <p>Don't have an account?</p>

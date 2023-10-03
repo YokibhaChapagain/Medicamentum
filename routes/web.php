@@ -13,8 +13,7 @@ use App\Http\Controllers\PrescriptionController;
 use App\Http\Controllers\QuotationController;
 use App\Http\Controllers\PreparedQuotationController;
 use App\Http\Controllers\UploadedPrescriptionController;
-
-
+use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,6 +36,11 @@ Route::post('/login', [LoginController::class, 'authenticate'])->name('login.aut
 
 Route::get('logout',[LoginController::class,'performlogout'])->name('logout.perform');
 
+Route::get('/emailVerify', [LoginController::class, 'emailVerifyGet'])->name('email.verify.get');
+Route::post('/email-verify', [LoginController::class, 'emailVerifyPost'])->name('email.verify.post');
+Route::get('/password-reset/{token}', [LoginController::class, 'passwordResetGet'])->name('password.reset.get');
+Route::post('/password-reset', [LoginController::class, 'passwordResetPost'])->name('password.reset.post');
+
 Route::get('/register', [RegisterController::class, 'show']);
 Route::post('/register', [RegisterController::class, 'store']);
 
@@ -44,18 +48,21 @@ Route::get('/pharmacy/register', [PharmacyRegisterController::class, 'show'])->n
 Route::post('/pharmacy/register', [PharmacyRegisterController::class, 'store']);
 
 
-Route::group(['middleware' => ['auth', 'isloggedin','user'], 'prefix' => 'user'], function () {
+
+Route::group(['middleware' => ['auth', 'isloggedin', 'user'], 'prefix' => 'user'], function () {
     Route::get('/dashboard', [UserController::class, 'index'])->name('user.dashboard');
-    Route::get('/order',[OrderController::class,'index'])->name('user.order');
-    // Route::post('/upload-prescription', [PrescriptionController::class,'store']);
-    Route::get('/upload-prescription', [PrescriptionController::class, 'create'])->name('upload-prescription');
-    Route::post('/prescription-store', [PrescriptionController::class, 'store']);
-    Route::get('/history', [PrescriptionController::class, 'index']);
-    Route::get('/prepared-quotation', [PreparedQuotationController::class, 'index']);
+    Route::get('/user-details', [UserController::class, 'display'])->name('user.details');
+    Route::get('/order', [OrderController::class, 'index'])->name('user.order');
     Route::get('/quotation-details/{id}', [UploadedPrescriptionController::class, 'Details']);
+    Route::get('/history', [PrescriptionController::class, 'index']);
+    Route::get('/upload-prescription', [PrescriptionController::class, 'create'])->name('upload-prescription');
+    Route::get('/prepared-quotation', [PreparedQuotationController::class, 'index']);
+    Route::post('/prescription-store', [PrescriptionController::class, 'store']);
     Route::post('/status-update', [PreparedQuotationController::class, 'store']);
 
+    Route::get('/{user}', [UserController::class, 'update'])->name('user.update');
 });
+
 
 Route::group(['middleware' => ['auth','isloggedin', 'admin'], 'prefix' => 'admin'], function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
@@ -76,6 +83,10 @@ Route::group(['middleware' => ['auth','isloggedin', 'pharmacy'], 'prefix' => 'ph
     Route::get('reject', [PharmacyController::class, 'reject']);
     Route::get('pending', [PharmacyController::class, 'pending']);
 
+});
+
+Route::get('/test',function(){
+return view('user.upload-prescription');
 });
 
 
