@@ -32,7 +32,7 @@
                     <h5 class="text-3xl font-bold text-center">{{$customers}}</h5>
                     <p class="text-center">Total Customers</p>
                     <div class="mt-4 text-center">
-                        <a href="{{url('customers')}}" class="text-black underline hover:text-white">More Info <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+                        <a href="{{url('pharmacy/customers')}}" class="text-black underline hover:text-white">More Info <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>
