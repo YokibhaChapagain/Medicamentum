@@ -86,12 +86,6 @@ class MedicineController extends Controller
 
     public function remove($id){
         $medicine= Medicine ::find($id);
-    //      if ($medicine->image) {
-    //     $imagePath = 'public/' . $medicine->image;
-    //     if (Storage::exists($imagePath)) {
-    //         Storage::delete($imagePath);
-    //     }
-    // }
         $medicine->delete();
         return redirect('pharmacy/inventory')->with('remove', 'Deleted Successfully!');
     }

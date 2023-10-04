@@ -59,8 +59,8 @@ Route::group(['middleware' => ['auth', 'isloggedin', 'user'], 'prefix' => 'user'
     Route::get('/prepared-quotation', [PreparedQuotationController::class, 'index']);
     Route::post('/prescription-store', [PrescriptionController::class, 'store']);
     Route::post('/status-update', [PreparedQuotationController::class, 'store']);
-
-    Route::get('/{user}', [UserController::class, 'update'])->name('user.update');
+    Route::get('/update/{user}', [UserController::class, 'edit'])->name('user.edit');
+    Route::put('/update/{user}', [UserController::class, 'update'])->name('user.update');
 });
 
 
@@ -82,7 +82,9 @@ Route::group(['middleware' => ['auth','isloggedin', 'pharmacy'], 'prefix' => 'ph
     Route::get('accept', [PharmacyController::class, 'accept']);
     Route::get('reject', [PharmacyController::class, 'reject']);
     Route::get('pending', [PharmacyController::class, 'pending']);
-
+    Route::get('/pharmacy-details', [PharmacyController::class, 'display'])->name('pharmacy.details');
+    Route::get('/update/{user}', [PharmacyController::class, 'edit'])->name('pharmacy.edit');
+    Route::put('/update/{user}', [PharmacyController::class, 'update'])->name('pharmacy.update');
 });
 
 Route::get('/test',function(){

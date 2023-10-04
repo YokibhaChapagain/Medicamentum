@@ -20,10 +20,10 @@
 
             <h2 class="text-2xl font-bold text-[#318ECB] text-center">Register</h2>
 
-            <form action="{{url('/register')}}" method="post" class="flex flex-col gap-4">
+            <form action="{{url('/register')}}" method="post" class="flex flex-col gap-4" enctype="multipart/form-data">
                 @csrf
 
-                <input class="p-2 mt-8 border rounded-xl" type="text" id="name" name="name" placeholder="Name" />
+                <input class="p-2 mt-4 border rounded-xl" type="text" id="name" name="name" placeholder="Name" />
 
                 @error('name')
                 <span class="text-red-500">{{ $message }}</span>
@@ -59,9 +59,14 @@
                 <span class="text-red-500">{{ $message }}</span>
                  @enderror
 
-                 <input class="p-2 border rounded-xl" type="number" id="mobilenumbern" name="mobilenumber" placeholder="Mobile Number ">
+                 <input class="p-2 mb-2 border rounded-xl" type="number" id="mobilenumbern" name="mobilenumber" placeholder="Mobile Number ">
 
-
+                 <div class="relative">
+                    <input type="file" id="profile_image" name="profile_image" class="hidden">
+                    <label for="profile_image" class="p-2 text-gray-500 transition duration-300 ease-in-out bg-white rounded-md cursor-pointer hover:bg-gray-300">
+                        Upload Profile Image
+                    </label>
+                </div>
                 <button  class="bg-[#318ECB] rounded-xl text-white py-2 my-2" type="submit">Confirm Registration</button>
 
             </form>

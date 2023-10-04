@@ -6,6 +6,8 @@ use App\Models\Quotation;
 use App\Models\Prescription;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+
 
 
 use Illuminate\Http\Request;
@@ -44,7 +46,7 @@ class PharmacyController extends Controller
                 ->where('pharmacy_id', $user->id);
         })
         ->distinct('order_id')->count('status');
-        
+
         return view('pharmacy.dashboard', compact('customers', 'medicines', 'newMedicines', 'accept', 'reject', 'pending'));
     }
 
@@ -90,5 +92,61 @@ class PharmacyController extends Controller
           ->get();
 
       return view('pharmacy.pending', compact('data'));
+    }
+
+
+    public function display(){
+        $user = Auth::user();
+
+        $usersWithUserRole = User::where('role', 'pharmacy')->get();
+        return view('pharmacy.pharmacy-details',compact('user','usersWithUserRole'));
+    }
+
+    public function edit(User $user)
+    {
+        $pharmacy =$user->pharmacy;
+        return view('pharmacy.pharmacy-edit', compact('user','pharmacy'));
+    }
+
+
+        public function update(Request $request, User $user)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'profile_image' => 'image|mimes:jpeg,jpg,png,gif,bmp,svg|max:2048',
+
+        ]);
+        if ($request->has('mobilenumber')) {
+            $request->validate([
+                'mobilenumber' => 'required',
+            ]);
+
+            $user->update([
+                'mobilenumber' => $request->input('mobilenumber'),
+            ]);
+        }
+
+        $user->update([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+        ]);
+        if ($request->hasFile('profile_image')) {
+            if ($user->profile_image) {
+                Storage::delete('public/' . $user->profile_image);
+            }
+
+            $imagePath = $request->file('profile_image')->store('public/images');
+            $user->profile_image = str_replace('public/', '', $imagePath);
+        }
+        $user->save();
+
+        if ($user->pharmacy) {
+            $user->pharmacy->update([
+                'telephonenumber' => $request->input('telephone'),
+                'location' => $request->input('location'),
+            ]);
+        }
+        return redirect()->route('pharmacy.details')->with('status','Updated Successfully!');
     }
 }

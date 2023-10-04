@@ -72,9 +72,12 @@
                             <td class="p-3 px-4 text-left">{{ $medicine->price }}</td>
                             <td class="p-3 px-6 text-left">{{ $medicine->quantity }}</td>
                             <td class="p-3 px-6 text-left">{{ $medicine->prescription_required ? 'Yes' : 'No' }}</td>
-                            <td class="p-3 px-4 text-left ">
-                                <img src="{{asset('storage/'.  $medicine->image) }}" alt="{{ $medicine->name }} Image" height="50" width="50">
+                            <td class="p-3 px-4 text-left">
+                                <a href="{{ asset('storage/' . $medicine->image) }}" target="_blank">
+                                    <img src="{{ asset('storage/' . $medicine->image) }}" alt="{{ $medicine->name }} Image" height="50" width="50">
+                                </a>
                             </td>
+
                             <td class="flex justify-center p-4 px-5">
                                 <button type="button" onclick="window.location='{{ route('edit', ['id' => $medicine->id]) }}'"
                                         class="px-2 py-1 mr-3 text-sm text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline">

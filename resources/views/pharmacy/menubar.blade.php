@@ -32,9 +32,11 @@
           </svg>
             </button>
         </div>
+        <a href="/pharmacy/pharmacy-details">
             <div class="w-10 h-10 mx-5 ">
                 <img class="max-w-full max-h-full " src="{{ URL('images/user.png') }}" alt="medicamentum" >
             </div>
+        </a>
         </div>
 
     </nav>

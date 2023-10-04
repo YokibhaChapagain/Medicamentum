@@ -22,6 +22,7 @@ class RegisterController extends Controller
             'password' => 'required|string|min:8',
             'password_confirmation' => 'required|same:password',
             'role' => 'required|in:User,Pharmacy,Admin',
+            'profile_image' => 'image|mimes:jpeg,jpg,png,gif,bmp,svg|max:2048',
         ]);
 
         if ($request->role === 'User' || $request->role === 'Admin') {
@@ -29,8 +30,6 @@ class RegisterController extends Controller
                 'mobilenumber' => 'required|string|min:10|unique:users',
             ]);
         }
-
-
 
         $user = new User;
 
@@ -40,7 +39,10 @@ class RegisterController extends Controller
         $user->role=$request->role;
         $user->mobilenumber = $request->input('mobilenumber');
 
-
+        if($request ->hasFile('profile_image')){
+            $imagePath = $request->file('profile_image')->store('public/images');
+            $user->profile_image = str_replace('public/','',$imagePath);
+        }
         $user->save();
 
         if($request->role=='Pharmacy'){

@@ -6,6 +6,7 @@ use App\Models\Prescription;
 use App\Models\Quotation;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 
 use Illuminate\Http\Request;
@@ -32,11 +33,19 @@ class UserController extends Controller
         return view('user.user-details',compact('user','usersWithUserRole'));
     }
 
+    public function edit(User $user)
+{
+    return view('user.user-edit', compact('user'));
+}
+
+
     public function update(Request $request, User $user)
 {
     $request->validate([
+        'name' => 'required',
         'email' => 'required|email|unique:users,email,' . $user->id,
         'mobilenumber' => 'required',
+        'profile_image' => 'image|mimes:jpeg,jpg,png,gif,bmp,svg|max:2048',
     ]);
 
     $user->update([
@@ -45,7 +54,18 @@ class UserController extends Controller
         'mobilenumber' => $request->input('mobilenumber'),
     ]);
 
-    return redirect()->route('user.details');
+    if ($request->hasFile('profile_image')) {
+        if ($user->profile_image) {
+            Storage::delete('public/' . $user->profile_image);
+        }
+
+        $imagePath = $request->file('profile_image')->store('public/images');
+        $user->profile_image = str_replace('public/', '', $imagePath);
+    }
+
+    $user->save();
+
+    return redirect()->route('user.details')->with('status','Updated Successfully!');
 }
 
 }
