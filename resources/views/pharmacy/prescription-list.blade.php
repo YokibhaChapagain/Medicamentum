@@ -45,7 +45,7 @@
                                 @elseif($row->confirm == 1)
                                 <button type="button" onclick="window.location='{{ url('pharmacy/uploaded-prescription/'.$row->id) }}'"
                                 class="inline-block px-4 py-2 font-bold text-white bg-green-500 rounded-md hover:bg-green-500">
-                            Add Medications
+                            Medication Updated
                         </button>
                                 @endif
                             </td>
