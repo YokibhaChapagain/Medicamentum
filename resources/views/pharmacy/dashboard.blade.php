@@ -18,37 +18,37 @@
     <div class="mt-20 mb-10 mr-4 ml-14 md:ml-64">
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             <div class="mb-3">
-                <div class="p-4 border-4 border-teal-500 rounded-md shadow-md bg-gradient-to-r from-teal-100 to-teal-50">
+                <div class="p-4 bg-gray-100 rounded-md shadow-md">
                     <h5 class="text-3xl font-bold text-center">{{$newMedicines}}</h5>
                     <p class="text-center">New Prescription</p>
                     <div class="mt-4 text-center">
-                        <a href="{{ url('pharmacy/prescription-list') }}" class="text-black underline hover:text-white">More Info <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+                        <a href="{{ url('pharmacy/prescription-list') }}" class="text-black underline hover:text-gray-400">More Info <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>
 
             <div class="mb-3">
-                <div class="p-4 border-4 border-teal-500 rounded-md shadow-md bg-gradient-to-r from-teal-100 to-teal-200">
+                <div class="p-4 bg-gray-100 rounded-md shadow-md">
                     <h5 class="text-3xl font-bold text-center">{{$customers}}</h5>
                     <p class="text-center">Total Customers</p>
                     <div class="mt-4 text-center">
-                        <a href="{{url('pharmacy/customers')}}" class="text-black underline hover:text-white">More Info <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+                        <a href="{{url('pharmacy/customers')}}" class="text-black underline hover:text-gray-400">More Info <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>
 
             <div class="mb-3">
-                <div class="p-4 border-4 border-teal-500 rounded-md shadow-md bg-gradient-to-r from-teal-50 to-teal-100">
+                <div class="p-4 bg-gray-100 rounded-md shadow-md">
                     <h5 class="text-3xl font-bold text-center">{{$medicines}}</h5>
                     <p class="text-center">Total Medicine</p>
                     <div class="mt-4 text-center">
-                        <a href="{{url('pharmacy/inventory')}}" class="text-black underline hover:text-white">More Info <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+                        <a href="{{url('pharmacy/inventory')}}" class="text-black underline hover:text-gray-400">More Info <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>
 
             <div class="mb-3">
-                <div class="p-4 border-4 border-green-500 rounded-md shadow-md bg-gradient-to-r from-green-100 to-green-300" style="background-color: transparent;">
+                <div class="p-4 border-2 border-green-500 rounded-md shadow-md bg-gradient-to-r from-green-100 to-green-300" style="background-color: transparent;">
                     <h5 class="text-3xl font-bold text-center">{{$accept}}</h5>
                     <p class="text-center">Accept Prescription</p>
                     <div class="mt-4 text-center">
@@ -59,7 +59,7 @@
 
 
             <div class="mb-3">
-                <div class="p-4 border-4 border-red-500 rounded-md shadow-md bg-gradient-to-r from-red-200 to-red-300" style="background-color: transparent;">
+                <div class="p-4 border-2 border-red-500 rounded-md shadow-md bg-gradient-to-r from-red-200 to-red-300" style="background-color: transparent;">
                     <h5 class="text-3xl font-bold text-center">{{$reject}}</h5>
                     <p class="text-center">Reject Prescription</p>
                     <div class="mt-4 text-center">
@@ -70,7 +70,7 @@
 
 
             <div class="mb-3">
-                <div class="p-4 border-4 border-yellow-500 rounded-md shadow-md bg-gradient-to-r from-yellow-300 to-yellow-100">
+                <div class="p-4 border-2 border-yellow-500 rounded-md shadow-md bg-gradient-to-r from-yellow-300 to-yellow-100">
                     <h5 class="text-3xl font-bold text-center">{{$pending}}</h5>
                     <p class="text-center">Pending Prescription</p>
                     <div class="mt-4 text-center">

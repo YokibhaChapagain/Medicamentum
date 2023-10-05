@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use App\Models\Pharmacy;
 use App\Models\Quotation;
 use App\Models\Prescription;
 use Illuminate\Support\Facades\DB;
@@ -17,8 +18,19 @@ class PharmacyController extends Controller
 
     public function index()
     {
-        $customers = User::where('role', 'user')->count();
         $user = Auth::user()->pharmacy;
+
+        // $pharmacyId = $user->pharmacy->id;
+        // $customers = Prescription::where('pharmacy_id', $pharmacyId)->distinct('user_id')->count('user_id');
+
+        $pharmacies = Pharmacy::all();
+        $pharmacyCustomers = [];
+        foreach ($pharmacies as $pharmacy) {
+            $customers = Prescription::where('pharmacy_id', $pharmacy->id)->distinct('user_id')->count('user_id');
+            $pharmacyCustomers[$pharmacy->id] = $customers;
+        }
+
+        // $customers = User::where('role', 'user')->count();
         $medicines = $user->medicines->count();
         $newMedicines = Prescription::where('pharmacy_id', $user->id)
                                         ->where('confirm', 0)
@@ -50,15 +62,22 @@ class PharmacyController extends Controller
         return view('pharmacy.dashboard', compact('customers', 'medicines', 'newMedicines', 'accept', 'reject', 'pending'));
     }
 
+
+    public function customers(){
+        $uniqueUserIds = Prescription::distinct()->pluck('user_id');
+        $uniqueUsers = User::whereIn('id', $uniqueUserIds)->get();
+
+        return view('pharmacy.customers',compact('uniqueUsers'));
+    }
     public function accept()
     {
         $user = Auth::user();
 
         $data = DB::table('quotations')
             ->join('prescriptions', 'prescriptions.id', '=', 'quotations.order_id')
-            ->select('order_id', DB::raw('MAX(status) AS status'), 'prescriptions.note', DB::raw('SUM(amount) AS amount'))
+            ->select('order_id', DB::raw('MAX(status) AS status'), 'prescriptions.note', DB::raw('SUM(total) AS amount'))
             ->where('status', 1)
-            ->where('prescriptions.pharmacy_id', $user->pharmacy->id) // Filter by authenticated user's pharmacy ID
+            ->where('prescriptions.pharmacy_id', $user->pharmacy->id)
             ->groupBy('order_id', 'prescriptions.note')
             ->get();
 
@@ -71,9 +90,9 @@ class PharmacyController extends Controller
 
         $data = DB::table('quotations')
             ->join('prescriptions', 'prescriptions.id', '=', 'quotations.order_id')
-            ->select('order_id', DB::raw('MAX(status) AS status'), 'prescriptions.note', DB::raw('SUM(amount) AS amount'))
+            ->select('order_id', DB::raw('MAX(status) AS status'), 'prescriptions.note', DB::raw('SUM(total) AS amount'))
             ->where('status', 2)
-            ->where('prescriptions.pharmacy_id', $user->pharmacy->id) // Filter by authenticated user's pharmacy ID
+            ->where('prescriptions.pharmacy_id', $user->pharmacy->id)
             ->groupBy('order_id', 'prescriptions.note')
             ->get();
 
@@ -85,9 +104,9 @@ class PharmacyController extends Controller
           $user = Auth::user();
           $data = DB::table('quotations')
           ->join('prescriptions', 'prescriptions.id', '=', 'quotations.order_id')
-          ->select('order_id', DB::raw('MAX(status) AS status'), 'prescriptions.note', DB::raw('SUM(amount) AS amount'))
+          ->select('order_id', DB::raw('MAX(status) AS status'), 'prescriptions.note', DB::raw('SUM(total) AS amount'))
           ->where('status', 0)
-          ->where('prescriptions.pharmacy_id', $user->pharmacy->id) // Filter by authenticated user's pharmacy ID
+          ->where('prescriptions.pharmacy_id', $user->pharmacy->id)
           ->groupBy('order_id', 'prescriptions.note')
           ->get();
 

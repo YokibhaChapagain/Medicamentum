@@ -27,7 +27,7 @@ class Pharmacy extends Model
     }
     public function prescriptions()
     {
-        return $this->hasMany(Prescription::class);
+        return $this->hasMany(Prescription::class,'pharmacy_id');
     }
     public function pharmacyUser()
 {

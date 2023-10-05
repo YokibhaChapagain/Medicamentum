@@ -19,10 +19,10 @@
 
         <div class="flex flex-wrap -mx-2">
             @foreach ($medicines as $medicine)
-                <div class="w-full px-2 mb-4 md:w-1/2 lg:w-1/5">
+                <div class="w-full px-2 mb-4 md:w-1/2 lg:w-1/4">
                     <div class="flex flex-col items-center justify-center h-full p-2 bg-white rounded-lg shadow-md">
                         <!-- Medicine Photo -->
-                        <div class="flex items-center justify-center w-32 h-32">
+                        <div class="flex items-center justify-center w-40 h-32">
                             <img src="{{ asset('storage/' . $medicine->image) }}" alt="{{ $medicine->name }} Image" class="object-contain max-w-full max-h-full">
                         </div>
 
@@ -39,10 +39,17 @@
                             <p class="mt-2 text-sm text-gray-500">Related Pharmacy: N/A</p>
                         @endif
 
-                        <!-- Add to Cart Button -->
-                        <button  onclick="window.location.href='/user/order'" class="px-4 py-2 mt-2 text-white bg-[#30afa3] rounded-md hover:bg-green-600">
-                            Add to Cart
-                        </button>
+                        <div class="flex mt-2">
+                            <!-- Add to Cart Button -->
+                            <button onclick="window.location.href='/user/order'" class=" text-white bg-[#30afa3] rounded-md hover:bg-green-600 px-2">
+                                Add to Cart
+                            </button>
+
+                            <!-- View Details Button -->
+                            <button onclick="window.location.href='/user/medicine/{{ $medicine->id }}'" class="px-2 py-2 ml-4 text-white bg-[#318ECB] rounded-md hover:bg-blue-600">
+                                View Details
+                            </button>
+                        </div>
                     </div>
                 </div>
             @endforeach

@@ -86,6 +86,8 @@ class MedicineController extends Controller
 
     public function remove($id){
         $medicine= Medicine ::find($id);
+        $medicine->quotation()->delete();
+
         $medicine->delete();
         return redirect('pharmacy/inventory')->with('remove', 'Deleted Successfully!');
     }

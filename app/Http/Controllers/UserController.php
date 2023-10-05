@@ -5,6 +5,7 @@ use App\Models\Medicine;
 use App\Models\Prescription;
 use App\Models\Quotation;
 use App\Models\User;
+use App\Models\Pharmacy;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -25,14 +26,22 @@ class UserController extends Controller
         return view('user.dashboard',compact('user','medicines','totalPrescription','accept','reject','pending'));
     }
 
+    public function singleMedicine($id){
+        $user = Auth::user();
+        $medicine = Medicine::find($id);
 
+        return view('user.medicine',compact('user','medicine'));
+    }
     public function display(){
         $user = Auth::user();
-
         $usersWithUserRole = User::where('role', 'user')->get();
         return view('user.user-details',compact('user','usersWithUserRole'));
     }
 
+    public function userPharmacy(){
+        $pharmacy = User::where('role', 'pharmacy')->get();
+        return view('user.user-pharmacy',compact('pharmacy'));
+    }
     public function edit(User $user)
 {
     return view('user.user-edit', compact('user'));
@@ -67,5 +76,6 @@ class UserController extends Controller
 
     return redirect()->route('user.details')->with('status','Updated Successfully!');
 }
+
 
 }

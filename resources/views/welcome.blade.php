@@ -8,14 +8,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Add your CSS and other head elements here -->
 </head>
 <body >
 
-
-    <!-- Main content container -->
     <div class="container p-4 mx-auto text-center">
-        <!-- Medicamentum in a larger size -->
         <div class="fixed left-32 top-60">
 
         <h1 class="text-5xl font-bold text-teal-700">Medicamentum</h1>
@@ -23,7 +19,6 @@
 
         </div>
 
-        <!-- Landing page image -->
         <div class="fixed right-10 top-10">
             <img class="h-192 w-192" src="{{ URL('images/lady.png') }}" alt="vector">
         </div>

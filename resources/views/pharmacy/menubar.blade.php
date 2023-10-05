@@ -6,7 +6,7 @@
     @vite('resources/css/app.css')
 
 </head>
-<body class="bg-gradient-to-r from-teal-100 via-teal-200 to-green-200">
+<body class="bg-gradient-to-r from-teal-100 via-teal-100 to-green-100">
     <nav class="fixed top-0 flex items-center w-full p-2 bg-white ">
 
             <div class="w-12 h-12 mx-5">

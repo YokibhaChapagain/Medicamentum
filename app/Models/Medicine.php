@@ -24,6 +24,6 @@ class Medicine extends Model
 
     public function quotation()
     {
-        return $this->hasMany(Quotation::class);
+        return $this->hasMany(Quotation::class,'drugs');
     }
 }
