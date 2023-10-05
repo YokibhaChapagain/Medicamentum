@@ -61,7 +61,10 @@ Route::group(['middleware' => ['auth', 'isloggedin', 'user'], 'prefix' => 'user'
     Route::post('/status-update', [PreparedQuotationController::class, 'store']);
     Route::get('/update/{user}', [UserController::class, 'edit'])->name('user.edit');
     Route::put('/update/{user}', [UserController::class, 'update'])->name('user.update');
+    Route::get("/medicine/{id}",[UserController::class,'singleMedicine']);
+    Route::get("/pharmacy",[UserController::class,'userPharmacy']);
 });
+
 
 
 Route::group(['middleware' => ['auth','isloggedin', 'admin'], 'prefix' => 'admin'], function () {
@@ -82,6 +85,7 @@ Route::group(['middleware' => ['auth','isloggedin', 'pharmacy'], 'prefix' => 'ph
     Route::get('accept', [PharmacyController::class, 'accept']);
     Route::get('reject', [PharmacyController::class, 'reject']);
     Route::get('pending', [PharmacyController::class, 'pending']);
+    Route::get('customers', [PharmacyController::class, 'customers']);
     Route::get('/pharmacy-details', [PharmacyController::class, 'display'])->name('pharmacy.details');
     Route::get('/update/{user}', [PharmacyController::class, 'edit'])->name('pharmacy.edit');
     Route::put('/update/{user}', [PharmacyController::class, 'update'])->name('pharmacy.update');
