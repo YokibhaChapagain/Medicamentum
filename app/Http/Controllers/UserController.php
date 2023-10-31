@@ -5,7 +5,6 @@ use App\Models\Medicine;
 use App\Models\Prescription;
 use App\Models\Quotation;
 use App\Models\User;
-use App\Models\Pharmacy;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -29,7 +28,6 @@ class UserController extends Controller
     public function singleMedicine($id){
         $user = Auth::user();
         $medicine = Medicine::find($id);
-
         return view('user.medicine',compact('user','medicine'));
     }
     public function display(){

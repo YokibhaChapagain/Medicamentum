@@ -1,4 +1,5 @@
 @include('user.menubar')
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,38 +8,52 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite('resources/css/app.css')
 </head>
-<body>
-    <div class="mt-20 mr-4 md:ml-64">
-        <div class="flex flex-wrap">
+<body class="bg-gray-100">
+    <div class="flex justify-center mt-20">
+        <div class="w-full md:w-2/3 lg:w-1/2">
             @foreach ($medicines as $medicine)
-                <div class="w-full px-2 mb-4 md:w-1/2 lg:w-1/2">
-                    <div class="flex flex-col items-center justify-center h-full p-2 bg-white rounded-lg shadow-md">
-                        <!-- Medicine Photo -->
-                        <div class="flex items-center justify-center w-32 h-32">
-                            <img src="{{ asset('storage/' . $medicine->image) }}" alt="{{ $medicine->name }} Image" class="object-contain max-w-full max-h-full">
-                        </div>
+                <div class="flex items-center p-4 mb-4 ml-32 bg-white rounded-lg shadow-md">
+                    <div class="w-24 h-24 mr-4">
+                        <img src="{{ asset('storage/' . $medicine->image) }}" alt="{{ $medicine->name }} Image" class="object-contain w-full h-full">
+                    </div>
 
-                        <!-- Medicine Name -->
-                        <h2 class="mt-2 text-lg font-semibold">{{ $medicine->name }}</h2>
+                    <div class="flex flex-col justify-between flex-grow"> <!-- Use justify-between to push content to the bottom -->
+                        <h2 class="text-xl font-semibold text-teal-600">{{ $medicine->name }}</h2>
 
-                        <!-- Medicine Price -->
                         <p class="text-gray-600">Rs. {{ $medicine->price }}</p>
 
-                        <!-- Related Pharmacy -->
                         @if ($medicine->pharmacy)
-                            <p class="mt-2 text-sm text-gray-500">Pharmacy: {{ $medicine->pharmacy->pharmacyUser->name ?? 'N/A'}}</p>
+                            <p class="mt-2 text-sm text-gray-500">Pharmacy: {{ $medicine->pharmacy->pharmacyUser->name ?? 'N/A' }}</p>
                         @else
                             <p class="mt-2 text-sm text-gray-500">Pharmacy: N/A</p>
                         @endif
+                    </div>
 
-                        <!-- Add to Cart Button -->
-                        <button  onclick="window.location.href='/user/order'" class="px-4 py-2 mt-2 text-white bg-[#30afa3] rounded-md hover:bg-green-600">
-                            Add to Cart
-                        </button>
+                    <div class="flex flex-row items-end mt-4">
+                        <button class="px-3 py-1 bg-gray-300 rounded-l" onclick="decreaseQuantity({{ $medicine->id }})">-</button>
+                        <input type="number" class="w-16 mx-2 text-center" id="quantity_{{ $medicine->id }}" value="0" readonly>
+                        <button class="px-3 py-1 bg-gray-300 rounded-r" onclick="increaseQuantity({{ $medicine->id }})">+</button>
                     </div>
                 </div>
             @endforeach
         </div>
-        </div>
+    </div>
+
+
+    <script>
+        function increaseQuantity(medicineId) {
+            const quantityInput = document.getElementById(`quantity_${medicineId}`);
+            const currentQuantity = parseInt(quantityInput.value);
+            quantityInput.value = currentQuantity + 1;
+        }
+
+        function decreaseQuantity(medicineId) {
+            const quantityInput = document.getElementById(`quantity_${medicineId}`);
+            const currentQuantity = parseInt(quantityInput.value);
+            if (currentQuantity > 0) {
+                quantityInput.value = currentQuantity - 1;
+            }
+        }
+    </script>
 </body>
 </html>

@@ -11,7 +11,7 @@
 <body>
 
     <div class="mt-20 mr-4 md:ml-64">
-        <div class="p-4 bg-[#33c9ba] rounded-lg mb-4">
+        <div class="p-4 mb-4 bg-teal-300 rounded-lg">
             <h1 class="flex text-2xl">
                 <div class="mr-2 font-bold">Welcome,</div>  <div class="text-white">{{$user->name}}</div>
             </h1>
@@ -40,12 +40,10 @@
                         @endif
 
                         <div class="flex mt-2">
-                            <!-- Add to Cart Button -->
-                            <button onclick="window.location.href='/user/order'" class=" text-white bg-[#30afa3] rounded-md hover:bg-green-600 px-2">
+                            <button onclick="window.location.href='/user/order'" class="px-2 text-white bg-teal-400 rounded-md hover:bg-green-600">
                                 Add to Cart
                             </button>
 
-                            <!-- View Details Button -->
                             <button onclick="window.location.href='/user/medicine/{{ $medicine->id }}'" class="px-2 py-2 ml-4 text-white bg-[#318ECB] rounded-md hover:bg-blue-600">
                                 View Details
                             </button>

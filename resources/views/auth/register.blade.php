@@ -52,7 +52,7 @@
                     <option value="" disabled selected>Select a role</option>
                     <option value="User">User</option>
                     <option value="Pharmacy">Pharmacy</option>
-                    <option value="Admin">Admin</option>
+                    {{-- <option value="Admin">Admin</option> --}}
                 </select>
 
                 @error('role')

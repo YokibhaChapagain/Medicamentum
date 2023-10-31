@@ -76,7 +76,7 @@
                                         <select class="mt-2 form-control drug_name @error('drug_name') is-invalid @enderror rounded-full border border-gray-300 py-2 pl-4 pr-10 block w-full appearance-none leading-5 focus:outline-none focus:ring focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="drug_name">
                                             <option value="" selected disabled>- Select Drugs Name -</option>
                                             @foreach ($drug as $row)
-                                            <option value="{{ $row->id }}" price="{{ $row->price }}" quantity="{{$row->quantity}}">{{ $row->name }}</option>
+                                            <option value="{{ $row->id }}" price="{{ $row->price }}" quantity="{{$row->quantity}}" dname="{{$row->name}}">{{ $row->name }}</option>
                                             @endforeach
                                         </select>
 
@@ -134,9 +134,6 @@
         </div>
     </div>
 
-
-
-        <!-- Include jQuery library -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 {{-- <script>
@@ -225,20 +222,20 @@
 <script>
     $(document).ready(function () {
 
-        var drugPrice = 0; // Initialize drugPrice here
-        var quotations = []; // Array to store quotations
+        var drugPrice = 0;
+        var quotations = [];
 
         $(document).on('change', '.drug_name', function () {
             var get_id = $(this).val();
-            drugPrice = parseFloat($(this).find(':selected').attr('price')); // Assign the value to drugPrice
+            drugPrice = parseFloat($(this).find(':selected').attr('price'));
             $('#drug_price').val(drugPrice);
 
             availableQUantity = parseFloat($(this).find(':selected').attr('quantity'));
 
             if (!isNaN(drugPrice)) {
-                $('#price').text(drugPrice.toFixed(2)); // Display the drug price
+                $('#price').text(drugPrice.toFixed(2));
             } else {
-                $('#price').text('0.00'); // Set a default value if price is NaN
+                $('#price').text('0.00');
             }
         });
 
@@ -264,11 +261,11 @@
             var totalAmount = (quantity * drugPrice).toFixed(2); // Use drugPrice from the outer scope
             $('#amount').val(totalAmount);
             var newRow = '<tr>' +
-                '<td class="px-4 py-2">' + drugName + '</td>' +
+                '<td class="px-4 py-2">' + $('.drug_name option:selected').attr('dname') + "</td>" +
                 '<td class="px-4 py-2">' + description + '</td>' +
                 '<td class="px-4 py-2 text-right">' + quantity + '</td>' +
                 '<td class="px-4 py-2 text-right">' + totalAmount + '</td>' +
-                // '<td class="px-4 py-2 text-right">' + drugPrice.toFixed(2) + '</td>' + // Display drugPrice here
+                // '<td class="px-4 py-2 text-right">' + drugPrice.toFixed(2) + '</td>' +
                 '</tr>';
 
             $('#quotationTableBody').append(newRow);
@@ -279,20 +276,19 @@
                 description: description,
                 quantity: quantity,
                 totalAmount: totalAmount,
-                drugPrice: drugPrice, // Include drugPrice in the quotation
+                drugPrice: drugPrice,
                 order_id: prescription_id,
                 user_id: user_id,
             };
             quotations.push(quotation);
 
-            // Recalculate and update the total amount
             updateTotalAmount();
         }
 
         // Add a click event handler for the "Add" button
         $('#addButton').click(function (e) {
             e.preventDefault();
-            addTableRow(); // Call the function to add a new row
+            addTableRow();
 
             // Clear input fields after adding the quotation
             $('#quanity').val('');

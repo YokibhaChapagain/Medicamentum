@@ -12,8 +12,8 @@
         <div class="flex flex-wrap -mx-2">
             @foreach ($pharmacy as $pharmacy)
             <div class="max-w-sm mx-2 bg-white border border-gray-200 rounded-lg shadow md:w-1/2 lg:w-1/4">
-                <a href="#">
-                    <img class="rounded-t-lg" src="{{ asset('storage/' . $pharmacy->profile_image) }}" alt="{{ $pharmacy->name }} Image" />
+
+                <img class="rounded-t-lg" src="{{ asset('storage/' . $pharmacy->profile_image) }}" alt="{{ $pharmacy->name }} Image" />
                 </a>
                 <div class="p-2">
                     <h2 class="my-2 text-xl font-semibold text-teal-600">{{ $pharmacy->name }}</h2>
