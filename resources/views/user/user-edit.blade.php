@@ -30,6 +30,11 @@
                 <input type="tel" id="mobilenumber" name="mobilenumber" value="{{ $user->mobilenumber }}" class="w-full px-4 py-2 border border-gray-400 rounded-full focus:outline-none focus:ring focus:border-blue-300" required>
             </div>
 
+            <div class="mb-4">
+                <label for="address" class="text-lg text-white">Address:</label>
+                <input type="text" id="address" name="address" value="{{ $user->address }}" class="w-full px-4 py-2 border border-gray-400 rounded-full focus:outline-none focus:ring focus:border-blue-300" required>
+            </div>
+
           <div class="mb-4">
                 <label for="profile_image" class="text-lg text-white">Profile Image:</label>
                 <input type="file" id="profile_image" name="profile_image" accept="image/*" class="w-full px-4 py-2 border border-white rounded-full focus:outline-none focus:ring focus:border-blue-300">

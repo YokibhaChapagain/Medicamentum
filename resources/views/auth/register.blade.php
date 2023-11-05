@@ -59,7 +59,9 @@
                 <span class="text-red-500">{{ $message }}</span>
                  @enderror
 
-                 <input class="p-2 mb-2 border rounded-xl" type="number" id="mobilenumbern" name="mobilenumber" placeholder="Mobile Number ">
+                <input class="p-2 border rounded-xl" type="text" id="addressField" name="address" placeholder="Address" style="display: none">
+
+                <input class="p-2 mb-2 border rounded-xl" type="number" id="mobilenumber" name="mobilenumber" placeholder="Mobile Number ">
 
                  <div class="relative">
                     <input type="file" id="profile_image" name="profile_image" class="hidden">
@@ -82,4 +84,18 @@
 </body>
 </html>
 
+<script>
+    const roleSelect = document.getElementById("role");
+    const addressField = document.getElementById("addressField");
+
+    roleSelect.addEventListener("change", () => {
+        const selectedRole = roleSelect.value;
+
+        if (selectedRole === "User") {
+            addressField.style.display = "block";
+        } else {
+            addressField.style.display = "none";
+        }
+    });
+</script>
 

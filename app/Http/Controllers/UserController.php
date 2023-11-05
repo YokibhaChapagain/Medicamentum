@@ -53,12 +53,14 @@ class UserController extends Controller
         'email' => 'required|email|unique:users,email,' . $user->id,
         'mobilenumber' => 'required',
         'profile_image' => 'image|mimes:jpeg,jpg,png,gif,bmp,svg|max:2048',
+        'address' => 'required',
     ]);
 
     $user->update([
         'name' => $request->input('name'),
         'email' => $request->input('email'),
         'mobilenumber' => $request->input('mobilenumber'),
+        'address'=> $request->input('address'),
     ]);
 
     if ($request->hasFile('profile_image')) {
