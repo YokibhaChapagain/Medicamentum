@@ -52,7 +52,7 @@ Route::post('/pharmacy/register', [PharmacyRegisterController::class, 'store']);
 Route::group(['middleware' => ['auth', 'isloggedin', 'user'], 'prefix' => 'user'], function () {
     Route::get('/dashboard', [UserController::class, 'index'])->name('user.dashboard');
     Route::get('/user-details', [UserController::class, 'display'])->name('user.details');
-    Route::get('/order', [OrderController::class, 'index'])->name('user.order');
+    Route::get('/order/{id}', [OrderController::class, 'addMedicine'])->name('user.order');
     Route::get('/quotation-details/{id}', [UploadedPrescriptionController::class, 'Details']);
     Route::get('/history', [PrescriptionController::class, 'index']);
     Route::get('/upload-prescription', [PrescriptionController::class, 'create'])->name('upload-prescription');
@@ -63,6 +63,9 @@ Route::group(['middleware' => ['auth', 'isloggedin', 'user'], 'prefix' => 'user'
     Route::put('/update/{user}', [UserController::class, 'update'])->name('user.update');
     Route::get("/medicine/{id}",[UserController::class,'singleMedicine']);
     Route::get("/pharmacy",[UserController::class,'userPharmacy']);
+    Route::get("/success",[QuotationController::class,'Payment']);
+    Route::get("/failure",[QuotationController::class,'Payment']);
+    Route::post("/payment",[QuotationController::class,'Payment']);
 });
 
 

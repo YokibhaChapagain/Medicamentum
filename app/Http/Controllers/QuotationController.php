@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Prescription;
 use App\Models\Quotation;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 
@@ -68,5 +69,37 @@ class QuotationController extends Controller
         return redirect()->back();
     }
 
+    public function Payment(){
+        $total_price=0;
+        $user_id=Quotation::where('user_id',Auth::id())->get();
+        foreach($user_id as $id){
+            $total_price=$total_price+$id->total;
+        }
+        $productItems = [];
+
+            \Stripe\Stripe::setApiKey('sk_test_51O9MyrCImfPEyZKFaLs7dsdp97CGhT8Zy5VqGwyunlaKU9i8OWmhMtUIC2ZxvLIKeuJJ6bqZNwzwk8rJIl9OSdw400mTu7Dzgh');
+            // $stripe = new \Stripe\StripeClient('sk_test_51Nx7ipHhFrhpubP1EePozGVEdvf6Gw2nmCLCF2RrXaJqtgp4g8GBCyDa6XRWbVNKhYv3zWy3dv6KUUjQJgv296UJ007XLZgDsX');
+            $quantity = 1;
+            $price = intval($total_price);
+            $productItems[] = [
+                'price_data' => [
+                    'product_data' => [
+                        'name' => 'Medicine',
+                    ],
+                    'currency' => 'NPR',
+                    'unit_amount' => $price . '00',
+                ],
+                'quantity' => $quantity
+            ];
+
+            $checkoutSession = \Stripe\Checkout\Session::create([
+                'line_items' => [$productItems],
+                'mode' => 'payment',
+                // 'customer_email' => $userEmail,
+                'success_url' => url('/success/'),
+                'cancel_url' => url('/fail/'),
+            ]);
+            return redirect()->away($checkoutSession->url);
+    }
 
 }

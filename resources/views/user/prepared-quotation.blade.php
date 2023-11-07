@@ -61,9 +61,13 @@
                 </table>
             </div>
         </div>
-        <div class="mt-4 text-right">
-            <button type="button" class="bg-[#318ECB] text-white rounded-full py-2 px-8 transition duration-300 ease-in-out transform hover:bg-[#59a3d7] hover:scale-105">Proceed to Payment</button>
-        </div>
+        <form action="/user/payment" method="POST">
+            @csrf
+            <div class="mt-4 text-right">
+                <button type="submit" class="bg-[#318ECB] text-white rounded-full py-2 px-8 transition duration-300 ease-in-out transform hover:bg-[#59a3d7] hover:scale-105">Proceed to Payment</button>
+            </div>
+
+        </form>
 
     </div>
 </body>
