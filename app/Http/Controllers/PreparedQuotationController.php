@@ -13,11 +13,11 @@ class PreparedQuotationController extends Controller
     public function index()
     {
        $data =  DB::select('
-       SELECT order_id, status, description, prescriptions.note, SUM(total) AS amount
+       SELECT order_id, status, description, prescriptions.note, SUM(total) AS amount, quotations.payment_status
        FROM quotations
        INNER JOIN prescriptions ON prescriptions.id = quotations.order_id
        WHERE quotations.user_id = '.Auth::id().'
-       GROUP BY order_id, status, description, prescriptions.note;'
+       GROUP BY order_id, status, description, prescriptions.note, quotations.payment_status;'
    );
        return view('user.prepared-quotation', compact('data'));
     }

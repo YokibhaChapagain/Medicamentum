@@ -71,7 +71,9 @@ class QuotationController extends Controller
 
     public function Payment(){
         $total_price=0;
-        $user_id=Quotation::where('user_id',Auth::id())->where('status', 1)->get();
+        $user_id=Quotation::where('user_id',Auth::id())->where('status', 1)
+        ->where('payment_status', '!=', 'paid')
+        ->get();
         foreach($user_id as $id){
             $total_price=$total_price+$id->total;
         }

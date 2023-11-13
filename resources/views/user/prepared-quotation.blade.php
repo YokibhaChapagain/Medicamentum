@@ -18,7 +18,7 @@
             <div class="p-4">
                 <table class="w-full border-separate border-spacing-y-4">
                     <thead class="bg-gray-100">
-                        <tr class=>
+                        <tr>
                             <th class="px-4 py-2">Item Orders</th>
                             <th class="px-4 py-2">Note</th>
                             <th class="px-4 py-2">Total Amount</th>
@@ -32,30 +32,32 @@
                         @php $i=1; @endphp
                         @php $total=0; @endphp
                         @forelse ($data as $row)
-                            <tr>
-                                <td class="px-8">{{$i++}}</td>
-                                <td>{{$row->note}}</td>
-                                <td  class="px-8">{{$row->amount}}</td>
-                                <td>{{$row->description}}</td>
-                                <td>
-                                    @if($row->status == 0)
-                                    <span class="px-4 py-0 pb-1 text-white bg-yellow-500 rounded-full">Pending</span>
-                                    @elseif ($row->status == 1)
-                                    <span class="px-4 py-1 text-white bg-green-500 rounded-full">Accept</span>
-                                    @elseif ($row->status == 2)
-                                    <span class="px-4 py-1 text-white bg-red-500 rounded-full">Reject</span>
-                                    @endif
-                                </td>
-                                <td>
-                                    @if($row->status == 0)
-                                    <a href="{{url('/user/quotation-details/')}}/{{$row->order_id}}" class="px-4 pb-1 text-white bg-blue-500 rounded-md">View</a>
-                                    @endif
-                                </td>
-                            </tr>
+                            @if($row->payment_status != 'paid')
+                                <tr>
+                                    <td class="px-8">{{$i++}}</td>
+                                    <td>{{$row->note}}</td>
+                                    <td  class="px-8">{{$row->amount}}</td>
+                                    <td>{{$row->description}}</td>
+                                    <td>
+                                        @if($row->status == 0)
+                                            <span class="px-4 py-0 pb-1 text-white bg-yellow-500 rounded-full">Pending</span>
+                                        @elseif ($row->status == 1)
+                                            <span class="px-4 py-1 text-white bg-green-500 rounded-full">Accept</span>
+                                        @elseif ($row->status == 2)
+                                            <span class="px-4 py-1 text-white bg-red-500 rounded-full">Reject</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($row->status == 0)
+                                            <a href="{{url('/user/quotation-details/')}}/{{$row->order_id}}" class="px-4 pb-1 text-white bg-blue-500 rounded-md">View</a>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endif
                         @empty
-                        <tr>
-                            <td colspan="5" class="text-center text-danger">No Data Records</td>
-                        </tr>
+                            <tr>
+                                <td colspan="5" class="text-center text-danger">No Data Records</td>
+                            </tr>
                         @endforelse
                     </tbody>
                 </table>
@@ -66,9 +68,7 @@
             <div class="mt-4 text-right">
                 <button type="submit" class="bg-[#318ECB] text-white rounded-full py-2 px-8 transition duration-300 ease-in-out transform hover:bg-[#59a3d7] hover:scale-105">Proceed to Payment</button>
             </div>
-
         </form>
-
     </div>
 </body>
 </html>
