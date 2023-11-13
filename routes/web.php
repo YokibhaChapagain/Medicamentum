@@ -63,7 +63,7 @@ Route::group(['middleware' => ['auth', 'isloggedin', 'user'], 'prefix' => 'user'
     Route::put('/update/{user}', [UserController::class, 'update'])->name('user.update');
     Route::get("/medicine/{id}",[UserController::class,'singleMedicine']);
     Route::get("/pharmacy",[UserController::class,'userPharmacy']);
-    Route::get("/success",[QuotationController::class,'Payment']);
+    Route::get("/success/{id}",[QuotationController::class,'success']);
     Route::get("/failure",[QuotationController::class,'Payment']);
     Route::post("/payment",[QuotationController::class,'Payment']);
 });

@@ -11,7 +11,6 @@
 <body class="bg-gray-100">
     <div class="flex justify-center mt-20">
         <div class="w-full md:w-2/3 lg:w-1/2">
-            @foreach ($medicines as $medicine)
                 <div class="flex items-center p-4 mb-4 ml-32 bg-white rounded-lg shadow-md">
                     <div class="w-24 h-24 mr-4">
                         <img src="{{ asset('storage/' . $medicine->image) }}" alt="{{ $medicine->name }} Image" class="object-contain w-full h-full">
@@ -35,7 +34,6 @@
                         <button class="px-3 py-1 bg-gray-300 rounded-r" onclick="increaseQuantity({{ $medicine->id }})">+</button>
                     </div>
                 </div>
-            @endforeach
         </div>
     </div>
 

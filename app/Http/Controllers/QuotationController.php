@@ -71,7 +71,7 @@ class QuotationController extends Controller
 
     public function Payment(){
         $total_price=0;
-        $user_id=Quotation::where('user_id',Auth::id())->get();
+        $user_id=Quotation::where('user_id',Auth::id())->where('status', 1)->get();
         foreach($user_id as $id){
             $total_price=$total_price+$id->total;
         }
@@ -96,10 +96,20 @@ class QuotationController extends Controller
                 'line_items' => [$productItems],
                 'mode' => 'payment',
                 // 'customer_email' => $userEmail,
-                'success_url' => url('/success/'),
+                'success_url' => url('/user/success/'.Auth::id()),
                 'cancel_url' => url('/fail/'),
             ]);
             return redirect()->away($checkoutSession->url);
     }
 
+    public function success($id){
+        $quotation = Quotation::where('user_id',$id)->get();
+        foreach ($quotation as $quot ) {
+            if($quot->status==1)
+            {$quot->payment_status = 'paid';
+            $quot->save();}
+    }
+    return view('user.success')->with('status','Payment Successful');
+    // return view('user.failure')->with('error', 'Quotation not found');
+}
 }
