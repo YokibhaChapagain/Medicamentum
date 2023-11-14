@@ -7,11 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite('resources/css/app.css')
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 </head>
 <body class="bg-gray-100">
     @php $total = 0 @endphp
     <div class="flex justify-center mt-20">
         <div class="w-full md:w-2/3 lg:w-1/2">
+                @if(session('success'))
+                <div class="p-2 mb-4 ml-32 text-white bg-teal-300 rounded-lg alert alert-success" id="remove-success">{{session('success')}}</div>
+            @endif
+            @yield('scripts')
             @if(session('cart'))
                 @foreach (session('cart') as $id => $details)
                 @php $total += $details['price'] * $details['quantity'] @endphp
@@ -25,8 +31,8 @@
                             <p class="text-gray-600">Rs. {{ $details['price'] }}</p>
                             <p class="text-gray-600">Quantity: {{ $details['quantity'] }}</p>
 
-                            @if (isset($details['pharmacy']) && isset($details['pharmacy']['pharmacyUser']['name']))
-                                <p class="mt-2 text-sm text-gray-500">Pharmacy: {{ $details['pharmacy']['pharmacyUser']['name'] }}</p>
+                            @if (isset($details['pharmacy']) && isset($details['pharmacy']['pharmacyUser']))
+                                <p class="mt-2 text-sm text-gray-500">Pharmacy: {{ $details['pharmacy']['pharmacyUser']}}</p>
                             @else
                                 <p class="mt-2 text-sm text-gray-500">Pharmacy: N/A</p>
                             @endif
@@ -41,7 +47,7 @@
                             <button class="px-3 py-1 bg-gray-300 rounded-r" onclick="increaseQuantity({{$id  }})">+</button>
 
                         </div> --}}
-                        <button class="mt-10 ml-6 text-danger cart_remove" onclick="removeItem({{$id}})">
+                        <button class="mt-10 ml-6 text-danger cart_remove" data-id="{{ $id }}" >
                             <svg xmlns="http://www.w3.org/2000/svg"  fill="red" class="w-8 h-8 bi bi-trash " viewBox="0 0 16 16">
                                 <path d="M1.5 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2V3h2a1 1 0 0 1 0 2H1a1 1 0 0 1 0-2h2V2zm12 2V2a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v2h10zM1 5h1v9a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V5h1a1 1 0 0 0 0-2H1a1 1 0 0 0 0 2zm4-3h1V2a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1h1a1 1 0 1 1 0 2H5a1 1 0 1 1 0-2z"/>
                             </svg>
@@ -77,7 +83,7 @@
 </body>
 
 @section('scripts')
-<script>
+<script type="text/javascript">
     $(" .cart_remove").click(function (e){
         e.preventDefault();
 
@@ -89,7 +95,7 @@
                 method: "DELETE",
                 data:{
                     _token:'{{csrf_token()}}',
-                    id: ele.parents("tr").attr("data-id")
+                    id: ele.data("id")
                 },
                 success: function(response){
                     window.location.reload();
@@ -97,6 +103,16 @@
             })
         }
     })
+
+</script>
+
+<script>
+    setTimeout(function() {
+        var successMessage = document.getElementById('remove-success');
+        if (successMessage) {
+            successMessage.style.display = 'none';
+        }
+    }, 3000);
 </script>
     {{-- <script>
         function increaseQuantity(medicineId) {
