@@ -14,7 +14,7 @@
     @php $total = 0 @endphp
     <div class="flex justify-center mt-20">
         <div class="w-full md:w-2/3 lg:w-1/2">
-                @if(session('success'))
+            @if(session('success'))
                 <div class="p-2 mb-4 ml-32 text-white bg-teal-300 rounded-lg alert alert-success" id="remove-success">{{session('success')}}</div>
             @endif
             @yield('scripts')

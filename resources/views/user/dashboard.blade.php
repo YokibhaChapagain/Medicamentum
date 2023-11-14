@@ -11,15 +11,13 @@
 <body>
 
     <div class="mt-20 mr-4 md:ml-64">
-        <div class="p-4 mb-4 bg-teal-300 rounded-lg">
+        <div class="p-3 mb-4 bg-teal-300 rounded-lg">
             <h1 class="flex text-2xl">
                 <div class="mr-2 font-bold">Welcome,</div>  <div class="text-white">{{$user->name}}</div>
             </h1>
         </div>
         @if(session('success'))
-        <div class="alert alert-success">
-            {{session('success')}}
-        </div>
+            <div class=" mb-4 text-[#318ECB] font-bold alert alert-success" id="add-success">{{session('success')}}</div>
         @endif
         <div class="flex flex-wrap -mx-2">
             @foreach ($medicines as $medicine)
@@ -107,8 +105,11 @@
 </body>
 </html>
 
-{{-- <script>
-    function addToCart() {
-            alert('Prescription is required to add this item to your cart.');
-    }
-</script> --}}
+<script>
+    setTimeout(function() {
+        var successMessage = document.getElementById('add-success');
+        if (successMessage) {
+            successMessage.style.display = 'none';
+        }
+    }, 2000);
+</script>
