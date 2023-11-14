@@ -129,9 +129,6 @@
             }
         }
 
-        function removeItem(medicineId) {
-            // Add logic to remove the item from the cart
-        }
     </script> --}}
 </body>
 </html>
