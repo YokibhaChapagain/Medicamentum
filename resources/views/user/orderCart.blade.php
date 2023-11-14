@@ -19,6 +19,7 @@
             @endif
             @yield('scripts')
             @if(session('cart'))
+            {{-- {{dd(session('cart'))}} --}}
                 @foreach (session('cart') as $id => $details)
                 @php $total += $details['price'] * $details['quantity'] @endphp
                     <div class="flex items-center p-4 mb-4 ml-32 bg-white rounded-lg shadow-md">
@@ -61,10 +62,17 @@
                         <h2 class="mr-2 text-xl font-semibold text-teal-700">Total:</h2>
                         <p class="text-lg text-teal-700"> Rs {{ $total }}</p>
                     </div>
-                    <div class="items-center w-1/6 p-4 bg-teal-400 rounded-lg shadow-md ">
-                        <button class="mr-2 text-xl font-bold text-white">Checkout</button>
+                    <form action={{route('checkout')}} method="POST">
+                        @csrf
+                        @foreach (session('cart') as $id => $details)
+                        <input type="hidden" name="subtotals[{{ $id }}]" value="{{ $details['quantity'] * $details['price'] }}">
+                        @endforeach
+                        {{-- <input type="hidden" name="total" value="{{ $total }}"> --}}
+                        <div class="items-center p-4 bg-teal-400 rounded-lg shadow-md ">
+                            <button class="mr-2 text-xl font-bold text-white " type="submit">Checkout</button>
+                        </div>
+                    </form>
 
-                    </div>
 
                 </div>
             @else
@@ -114,6 +122,11 @@
         }
     }, 3000);
 </script>
+
+{{-- For checkout --}}
+
+
+
     {{-- <script>
         function increaseQuantity(medicineId) {
             const quantityInput = document.getElementById(`quantity_${medicineId}`);

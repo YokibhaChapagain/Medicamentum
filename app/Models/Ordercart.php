@@ -13,6 +13,8 @@ class Ordercart extends Model
         'quantity',
         'product_id',
         'user_id',
+        'total',
+        'payment_status'
     ];
 
     public function medicine()
