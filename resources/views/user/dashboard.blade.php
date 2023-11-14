@@ -16,7 +16,11 @@
                 <div class="mr-2 font-bold">Welcome,</div>  <div class="text-white">{{$user->name}}</div>
             </h1>
         </div>
-
+        @if(session('success'))
+        <div class="alert alert-success">
+            {{session('success')}}
+        </div>
+        @endif
         <div class="flex flex-wrap -mx-2">
             @foreach ($medicines as $medicine)
 
@@ -40,11 +44,16 @@
                             <p class="mt-2 text-sm text-gray-500">Related Pharmacy: N/A</p>
                         @endif
                          @if($medicine->prescription_required==0)
+                         <form action="{{route('add_to_cart',$medicine->id)}}">
+                            @csrf
 
                             <div class="flex mt-2">
-                            <button onclick="window.location.href='/user/order/{{ $medicine->id }}'" class="px-2 text-white bg-teal-400 rounded-md hover:bg-green-600">
-                                Add to Cart
-                            </button>
+                                <button  class="px-2 text-white bg-teal-400 rounded-md hover:bg-green-600">
+                                    Add to Cart
+                                </button>
+                        </form>
+
+
                         @else
                         <div class="flex mt-2">
                             <button onclick="addToCart({{ $medicine->prescription_required }})" class="px-2 text-white bg-teal-400 rounded-md hover:bg-green-600">

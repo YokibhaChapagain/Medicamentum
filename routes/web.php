@@ -52,7 +52,9 @@ Route::post('/pharmacy/register', [PharmacyRegisterController::class, 'store']);
 Route::group(['middleware' => ['auth', 'isloggedin', 'user'], 'prefix' => 'user'], function () {
     Route::get('/dashboard', [UserController::class, 'index'])->name('user.dashboard');
     Route::get('/user-details', [UserController::class, 'display'])->name('user.details');
-    Route::get('/order/{id}', [OrderController::class, 'addMedicine'])->name('user.order');
+     Route::get('/add-to-cart/{id}',[OrderController::class,'addToCart'])->name('add_to_cart');
+     Route::get('/cart',[OrderController::class,'cart']);
+     Route::delete('/remove-from-cart',[OrderController::class,'remove'])->name('remove_from_cart');
     Route::get('/quotation-details/{id}', [UploadedPrescriptionController::class, 'Details']);
     Route::get('/history', [PrescriptionController::class, 'index']);
     Route::get('/upload-prescription', [PrescriptionController::class, 'create'])->name('upload-prescription');

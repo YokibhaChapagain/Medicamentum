@@ -14,4 +14,9 @@ class Ordercart extends Model
         'product_id',
         'user_id',
     ];
+
+    public function medicine()
+    {
+        return $this->belongsTo(Medicine::class,'product_id');
+    }
 }
