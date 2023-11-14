@@ -50,23 +50,26 @@
 
                     </div>
                 @endforeach
+                <div class="flex flex-row">
+                    <div class="flex items-center w-1/4 p-4 ml-32 mr-6 bg-white rounded-lg shadow-md">
+                        <h2 class="mr-2 text-xl font-semibold text-teal-700">Total:</h2>
+                        <p class="text-lg text-teal-700"> Rs {{ $total }}</p>
+                    </div>
+                    <div class="items-center w-1/6 p-4 bg-teal-400 rounded-lg shadow-md ">
+                        <button class="mr-2 text-xl font-bold text-white">Checkout</button>
+
+                    </div>
+
+                </div>
             @else
-            <div class="flex flex-col"></div>
-                <h2> The Cart is Empty</h2>
-                <h1> Add Items</h1>
-        </div>
-            @endif
-            <div class="flex flex-row">
-                <div class="flex items-center w-1/4 p-4 ml-32 mr-6 bg-white rounded-lg shadow-md">
-                    <h2 class="mr-2 text-xl font-semibold text-teal-700">Total:</h2>
-                    <p class="text-lg text-teal-700"> Rs {{ $total }}</p>
-                </div>
-                <div class="items-center w-1/6 p-4 bg-teal-400 rounded-lg shadow-md ">
-                    <button class="mr-2 text-xl font-bold text-white">Checkout</button>
-
-                </div>
-
+            <div class="flex flex-col items-center mt-24 ml-32">
+                <img src="{{ URL('images/cart.png') }}" alt="Empty Cart" class="w-40 h-32 mb-4">
+                <h2 class="text-2xl font-semibold text-teal-700">Your Cart is Empty</h2>
+                <p class="mb-8 text-gray-500">Add items to your cart and start shopping!</p>
+                <a href="{{ route('user.dashboard') }}" class="px-6 py-3 text-white transition duration-300 bg-teal-500 rounded-md hover:bg-teal-600">Go to Dashboard</a>
             </div>
+            @endif
+
 
         </div>
 
