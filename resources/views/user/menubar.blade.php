@@ -7,39 +7,43 @@
 
 </head>
 <body class="bg-gradient-to-r from-teal-100 via-teal-100 to-green-100">
-    <nav class="fixed top-0 flex items-center w-full p-2 bg-white ">
+    <nav class="fixed top-0 flex items-center w-full p-2 bg-white">
 
-            <div class="w-12 h-12 mx-5">
-                <img class="max-w-full max-h-full " src="{{ URL('images/logo.png') }}" alt="medicamentum" >
-            </div>
-
-            <span class="text-3xl font-bold text-black">Medicamentum</span>
-
-            <div class="flex-grow"></div>
-            <div class="flex">
-            <div class="relative hidden mx-auto text-gray-600 mr lg:block">
-            <input
-                class="h-10 pl-4 pr-20 text-sm bg-white border-2 border-gray-300 rounded-lg focus:outline-1"
-                type="search" name="search" placeholder="Search">
-            <button type="submit" class="absolute top-0 right-0 mt-3 mr-2">
-                <svg class="w-4 h-4 text-gray-600 fill-current" xmlns="http://www.w3.org/2000/svg"
-                     version="1.1" id="Capa_1" x="0px" y="0px"
-                     viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;"
-                     xml:space="preserve"
-                     width="512px" height="512px">
-            <path
-                d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z"/>
-          </svg>
-            </button>
+        <div class="w-12 h-12 mx-5">
+            <img class="max-w-full max-h-full " src="{{ URL('images/logo.png') }}" alt="medicamentum">
         </div>
+
+        <span class="text-3xl font-bold text-black">Medicamentum</span>
+
+        <div class="flex-grow"></div>
+
+        <div class="flex items-center">
+            <div class="flex space-x-2  p-1 font-bold text-black transition duration-100 cursor-pointer hover:bg-[#3ba096] hover:text-white hover:rounded">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="w-6 h-6 bi bi-bag-check" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                    <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/>
+                  </svg>
+                  <a href="{{url('/user/cart')}}">Cart</a>
+              </div>
+            <div class="relative mx-auto ml-4 text-gray-600 lg:block">
+                <form action="{{ route('user.search.medicine') }}" method="GET">
+                    @csrf
+                    <input
+                        id="searchInput"
+                        class="h-10 pl-6 pr-10 text-sm bg-white border-2 border-gray-300 rounded-lg focus:outline-1"
+                        type="search" name="search" placeholder="Search">
+                </form>
+            </div>
+        </div>
+
         <a href="/user/user-details">
-            <div class="w-10 h-10 mx-5 ">
-                <img class="max-w-full max-h-full " src="{{ URL('images/user.png') }}" alt="medicamentum" >
+            <div class="w-10 h-10 mx-5">
+                <img class="max-w-full max-h-full " src="{{ URL('images/user.png') }}" alt="medicamentum">
             </div>
         </a>
-        </div>
 
     </nav>
+
 
     <aside class="fixed hidden w-60 sm:block top-16">
         <div class="flex flex-col justify-between h-screen p-4 bg-white rounded-r-3xl">
@@ -104,3 +108,18 @@
 
 </body>
 </html>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.getElementById("searchInput");
+        const clearButton = document.getElementById("clearButton");
+
+        searchInput.addEventListener("input", function () {
+            clearButton.style.display = this.value ? "block" : "none";
+        });
+
+        clearButton.addEventListener("click", function () {
+            searchInput.value = "";
+            clearButton.style.display = "none";
+        });
+    });
+</script>

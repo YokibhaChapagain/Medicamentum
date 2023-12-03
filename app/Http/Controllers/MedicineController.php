@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Medicine;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
+
 
 class MedicineController extends Controller
 {
@@ -91,5 +92,32 @@ class MedicineController extends Controller
         $medicine->delete();
         return redirect('pharmacy/inventory')->with('remove', 'Deleted Successfully!');
     }
+
+    public function searchMedicine(Request $request)
+    {
+        $query = $request->input('search');
+
+
+        $results = Medicine::where('name', 'like', '%' . $query . '%')
+
+            ->get();
+
+
+        return view('user.medicine_search_result', compact('results'));
+    }
+
+    public function searchMedicinePharmacy(Request $request)
+    {
+        $query = $request->input('search');
+
+
+        $results = Medicine::where('name', 'like', '%' . $query . '%')
+
+            ->get();
+
+
+        return view('pharmacy.medicine_search_result', compact('results'));
+    }
+
 
 }

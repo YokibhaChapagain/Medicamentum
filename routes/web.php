@@ -70,6 +70,8 @@ Route::group(['middleware' => ['auth', 'isloggedin', 'user'], 'prefix' => 'user'
     Route::get("/success/{id}",[QuotationController::class,'success']);
     Route::get("/failure",[QuotationController::class,'Payment']);
     Route::post("/payment",[QuotationController::class,'Payment']);
+    Route::get('/search-medicine', [MedicineController::class, 'searchMedicine'])->name('user.search.medicine');
+
 });
 
 
@@ -96,6 +98,8 @@ Route::group(['middleware' => ['auth','isloggedin', 'pharmacy'], 'prefix' => 'ph
     Route::get('/pharmacy-details', [PharmacyController::class, 'display'])->name('pharmacy.details');
     Route::get('/update/{user}', [PharmacyController::class, 'edit'])->name('pharmacy.edit');
     Route::put('/update/{user}', [PharmacyController::class, 'update'])->name('pharmacy.update');
+    Route::get('/search-medicine', [MedicineController::class, 'searchMedicinePharmacy'])->name('pharmacy.search.medicine');
+
 });
 
 Route::get('/test',function(){
