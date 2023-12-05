@@ -121,7 +121,7 @@ public function index(){
                 'line_items' => [$productItems],
                 'mode' => 'payment',
                 // 'customer_email' => $userEmail,
-                'success_url' => url('/user/success/'.Auth::id()),
+                'success_url' => url('/user/successcart/'.Auth::id()),
                 'cancel_url' => url('/fail/'),
             ]);
             return redirect()->away($checkoutSession->url);
@@ -131,8 +131,8 @@ public function index(){
         foreach ($order as $orders ) {
             $orders->payment_status = 'paid';
             $orders->save();
-    }
+        }
 
-    return view('user.success')->with('status','Payment Successful');
+        return view('user.success')->with('status','Payment Successful');
 }
 }

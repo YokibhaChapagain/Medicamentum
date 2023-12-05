@@ -69,6 +69,8 @@ Route::group(['middleware' => ['auth', 'isloggedin', 'user'], 'prefix' => 'user'
     Route::get("/pharmacy",[UserController::class,'userPharmacy']);
     Route::get("/success/{id}",[QuotationController::class,'success']);
     Route::get("/failure",[QuotationController::class,'Payment']);
+    Route::get("/successcart/{id}",[OrderController::class,'success']);
+    Route::get("/failurecart",[OrderController::class,'Payment']);
     Route::post("/payment",[QuotationController::class,'Payment']);
     Route::get('/search-medicine', [MedicineController::class, 'searchMedicine'])->name('user.search.medicine');
 
