@@ -66,7 +66,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />
                   </svg>
 
-                  <a href="">Sales Report</a>
+                  <a href="{{url('/pharmacy/sales-report')}}">Sales Report</a>
               </div>
 
               <div class="flex px-6 py-4 space-x-6 font-bold text-white bg-red-500 cursor-pointer mt-52 rounded-3xl ">

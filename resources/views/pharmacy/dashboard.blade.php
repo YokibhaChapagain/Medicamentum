@@ -69,7 +69,7 @@
             </div>
 
 
-            <div class="mb-3">
+            <div class="mb-4">
                 <div class="p-4 border-2 border-yellow-500 rounded-md shadow-md bg-gradient-to-r from-yellow-300 to-yellow-100">
                     <h5 class="text-3xl font-bold text-center">{{$pending}}</h5>
                     <p class="text-center">Pending Prescription</p>
@@ -80,45 +80,23 @@
             </div>
         </div>
         <div class="container p-2 mx-auto">
-            <h1 class="mb-4 text-2xl font-semibold">Sales Report</h1>
-            <div class="overflow-hidden bg-white rounded-lg shadow-md">
-                <table class="min-w-full bg-white">
-                    <thead>
-                        <tr>
-                            <th class="px-6 py-3 text-xs font-semibold leading-4 tracking-wider text-left text-gray-600 uppercase bg-gray-100 border-b border-gray-200">Date</th>
-                            <th class="px-6 py-3 text-xs font-semibold leading-4 tracking-wider text-left text-gray-600 uppercase bg-gray-100 border-b border-gray-200">User</th>
-                            <th class="px-6 py-3 text-xs font-semibold leading-4 tracking-wider text-left text-gray-600 uppercase bg-gray-100 border-b border-gray-200">Price</th>
-                            <th class="px-6 py-3 text-xs font-semibold leading-4 tracking-wider text-left text-gray-600 uppercase bg-gray-100 border-b border-gray-200">Quantity</th>
-                            <th class="px-6 py-3 text-xs font-semibold leading-4 tracking-wider text-left text-gray-600 uppercase bg-gray-100 border-b border-gray-200">Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">2023-10-01</td>
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">Steve Thapa</td>
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">Rs 25.00</td>
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">5</td>
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">Rs 125.00</td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">2023-10-02</td>
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">Kailash Kher</td>
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">Rs 30.00</td>
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">3</td>
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">Rs 90.00</td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">2023-10-03</td>
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">Prince Shah</td>
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">Rs 15.00</td>
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">8</td>
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">Rs 120.00</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
 
+            <h1 class="mb-6 text-2xl font-semibold text-teal-700">Sales Report</h1>
+
+            <div class="flex justify-between space-x-4">
+                <a href="{{ url('pharmacy/sales-report') }}" class="flex-1 p-6 text-black transition-all duration-300 bg-teal-200 rounded-lg hover:bg-teal-500">
+                    <h2 class="mb-2 text-xl font-semibold">Prescribed Sales</h2>
+                    <p class="text-sm">View the verified sales report.</p>
+                </a>
+
+
+                <a href="{{ url('pharmacy/manual-sales-report') }}" class="flex-1 p-6 text-black transition-all duration-300 bg-teal-200 rounded-lg hover:bg-teal-500">
+                    <h2 class="mb-2 text-xl font-semibold">Non-prescribed Sales</h2>
+                    <p class="text-sm">View the manual sales report.</p>
+                </a>
+            </div>
         </div>
+
     </div>
 </body>
 </html>

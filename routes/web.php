@@ -12,6 +12,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PrescriptionController;
 use App\Http\Controllers\QuotationController;
 use App\Http\Controllers\PreparedQuotationController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UploadedPrescriptionController;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
@@ -101,6 +102,9 @@ Route::group(['middleware' => ['auth','isloggedin', 'pharmacy'], 'prefix' => 'ph
     Route::get('/update/{user}', [PharmacyController::class, 'edit'])->name('pharmacy.edit');
     Route::put('/update/{user}', [PharmacyController::class, 'update'])->name('pharmacy.update');
     Route::get('/search-medicine', [MedicineController::class, 'searchMedicinePharmacy'])->name('pharmacy.search.medicine');
+    Route::get('sales-report',[ReportController::class,'salesReport']);
+    Route::get('manual-sales-report',[ReportController::class,'manualSalesReport']);
+
 
 });
 

@@ -27,7 +27,7 @@ class Prescription extends Model
     }
     public function quotation()
     {
-        return $this->hasMany(Quotation::class);
+        return $this->hasMany(Quotation::class,'order_id');
     }
 
 }
